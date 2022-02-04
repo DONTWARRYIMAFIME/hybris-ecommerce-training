@@ -24,6 +24,16 @@
     <extension name='backoffice' />
     <extension name='backofficesolrsearch' />
     <extension name='platformbackoffice' />
+    
+    <extension name='trainingbackoffice' />
+    <extension name='trainingcore' />
+    <extension name='trainingfacades' />
+    <extension name='trainingfulfilmentprocess' />
+    <extension name='traininginitialdata' />
+    <extension name='trainingstorefront' />
+    <extension name='questions' />
+    <extension name='trainingtest' />
+    
     <extension name='basecommerce' />
     <extension name='basecommercebackoffice' />
     <extension name='customerreview' />
@@ -209,13 +219,5 @@
     <extension name='permissionsfacades' />
     <extension name='permissionswebservices' />
     <extension name='webservicescommons' />
-    
-    <extension name='trainingbackoffice' />
-    <extension name='trainingcore' />
-    <extension name='trainingfacades' />
-    <extension name='trainingfulfilmentprocess' />
-    <extension name='traininginitialdata' />
-    <extension name='trainingstorefront' />
-    <extension name='trainingtest' />
   </extensions>
 </hybrisconfig>
