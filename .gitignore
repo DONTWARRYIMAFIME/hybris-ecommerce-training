@@ -33,3 +33,9 @@ beans.xsd
 ruleset.xml
 *.log
 base.properties
+
+bin/custom/training/trainingstorefront/web/webroot/_ui/addons/questions
+bin/custom/training/trainingstorefront/web/webroot/WEB-INF/_ui-src/
+bin/custom/training/trainingstorefront/web/addonsrc/questions
+
+bin/custom/training/*
