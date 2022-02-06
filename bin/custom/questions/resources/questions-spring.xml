@@ -36,4 +36,33 @@
 		<property name="extensionName" value="questions" />
 	</bean>
 
+	<bean id="productWithQuestionsConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.expertsoft.data.ProductData"/>
+		<property name="populators">
+			<list>
+				<ref bean="productWithQuestionsPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="questionConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.expertsoft.data.QuestionData"/>
+		<property name="populators">
+			<list>
+				<ref bean="questionPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="productWithQuestionsPopulator" class="com.expertsoft.populators.ProductWithQuestionsPopulator">
+		<property name="questionConverter" ref="questionConverter"/>
+	</bean>
+
+	<bean id="questionPopulator" class="com.expertsoft.populators.QuestionPopulator"/>
+
+	<alias name="defaultProductWithQuestionsFacade" alias="productWithQuestionsFacade"/>
+	<bean id="defaultProductWithQuestionsFacade" class="com.expertsoft.facades.impl.DefaultProductWithQuestionsFacade">
+		<property name="productWithQuestionsConverter" ref="productWithQuestionsConverter"/>
+		<property name="productService" ref="productService"/>
+	</bean>
 </beans>

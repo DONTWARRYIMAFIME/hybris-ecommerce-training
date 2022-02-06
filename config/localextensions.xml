@@ -219,5 +219,6 @@
     <extension name='permissionsfacades' />
     <extension name='permissionswebservices' />
     <extension name='webservicescommons' />
+
   </extensions>
 </hybrisconfig>

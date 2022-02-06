@@ -102,6 +102,9 @@ public class TestDataSystemSetup extends AbstractSystemSetup
 
 			LOG.info("Creating Test Questions...");
 			importImpexFile(context, "/trainingtest/import/csquestion.impex");
+
+			LOG.info("Creating ContentSlot for questions...");
+			importImpexFile(context, "/trainingtest/import/questionCMSComponent.impex");
 		}
 	}
 }
