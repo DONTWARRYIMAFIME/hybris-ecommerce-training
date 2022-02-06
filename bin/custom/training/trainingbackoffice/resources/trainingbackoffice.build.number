@@ -1,0 +1,11 @@
+#Ant properties
+#Wed Nov 03 12:16:12 CET 2021
+version.api=2011
+vendor=hybris
+group.id=de.hybris.platform
+name=trainingbackoffice
+description=trainingbackoffice
+builddate=20211103 1211
+releasedate=20201119 1630
+version=2011.13
+module.name=platform-module
