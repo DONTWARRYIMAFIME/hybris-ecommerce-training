@@ -7,7 +7,7 @@ import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.type.ComposedType;
 import org.apache.log4j.Logger;
 
-public class QuestionsCMSComponent extends AbstractCMSComponent
+public class QuestionsCMSComponent extends GeneratedQuestionsCMSComponent
 {
     @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(QuestionsCMSComponent.class.getName());
@@ -27,6 +27,6 @@ public class QuestionsCMSComponent extends AbstractCMSComponent
     @Override
     public Boolean isContainer(SessionContext sessionContext)
     {
-        return null;
+        return false;
     }
 }

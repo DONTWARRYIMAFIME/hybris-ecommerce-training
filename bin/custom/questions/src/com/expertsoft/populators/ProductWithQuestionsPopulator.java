@@ -1,9 +1,9 @@
 package com.expertsoft.populators;
 
 
-import com.expertsoft.data.ProductData;
 import com.expertsoft.data.QuestionData;
 import com.expertsoft.model.QuestionModel;
+import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;

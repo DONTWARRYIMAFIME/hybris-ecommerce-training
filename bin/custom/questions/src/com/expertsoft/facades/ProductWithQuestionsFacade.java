@@ -1,6 +1,6 @@
 package com.expertsoft.facades;
 
-import com.expertsoft.data.ProductData;
+import de.hybris.platform.commercefacades.product.data.ProductData;
 
 public interface ProductWithQuestionsFacade
 {

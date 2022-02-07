@@ -1,19 +1,18 @@
 package com.expertsoft.controllers.cms;
 
 import com.expertsoft.controllers.QuestionsControllerConstants;
-import com.expertsoft.data.ProductData;
 import com.expertsoft.facades.ProductWithQuestionsFacade;
 import com.expertsoft.model.QuestionsCMSComponentModel;
 import de.hybris.platform.addonsupport.controllers.cms.AbstractCMSAddOnComponentController;
+import de.hybris.platform.commercefacades.product.data.ProductData;
+import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.product.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 @Scope("tenant")
@@ -21,22 +20,23 @@ import javax.servlet.http.HttpServletRequest;
 @Controller("QuestionsCMSComponentController")
 public class QuestionsCMSComponentController extends AbstractCMSAddOnComponentController<QuestionsCMSComponentModel>
 {
-//    private static final String PRODUCT_CODE_PATH_VARIABLE_PATTERN = "/{productCode:.*}";
+    private ProductWithQuestionsFacade productWithQuestionsFacade;
 
-//    @Resource
-//    private ProductWithQuestionsFacade productWithQuestionsFacade;
-//
-//    @GetMapping(PRODUCT_CODE_PATH_VARIABLE_PATTERN)
-//    @ModelAttribute("productWithQuestions")
-//    public ProductData fillModelWith(@PathVariable String productCode)
-//    {
-//        return productWithQuestionsFacade.getProductWithQuestions(productCode);
-//    }
+    @Autowired
+    public void setProductWithQuestionsFacade(ProductWithQuestionsFacade productWithQuestionsFacade)
+    {
+        this.productWithQuestionsFacade = productWithQuestionsFacade;
+    }
 
     @Override
     protected void fillModel(HttpServletRequest request, Model model, QuestionsCMSComponentModel component)
     {
-        model.addAttribute("numberOfQuestionsToShow", component.getNumberOfQuestionsToShow());
+        final String productCode = getRequestContextData(request).getProduct().getCode();
+        final ProductData productWithQuestions = productWithQuestionsFacade.getProductWithQuestions(productCode);
+
+        model.addAttribute("productWithQuestions", productWithQuestions);
+        model.addAttribute("numberOfQuestionsToShow", Math.min(component.getNumberOfQuestionsToShow(),
+                productWithQuestions.getQuestions().size()));
         model.addAttribute("fontSize", component.getFontSize());
     }
 }

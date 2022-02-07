@@ -14,16 +14,10 @@
            http://www.springframework.org/schema/context/spring-context.xsd">
            
     <context:annotation-config/>
-	<context:component-scan base-package="questions"/>
+	<context:component-scan base-package="com.expertsoft.controllers.cms" />
 
-	<bean id="QuestionsCMSComponentController " class="com.expertsoft.controllers.cms.QuestionsCMSComponentController" scope="tenant">
-	</bean>
-
-	<bean id="questionsCMSComponentRenderer" parent="genericAddOnCMSComponentRenderer"/>
-
-	<bean id="questionsCMSComponentRendererMapping" parent="addonCmsComponentRendererMapping">
-		<property name="typeCode" value="QuestionsCMSComponent"/>
-		<property name="renderer" ref="questionsCMSComponentRenderer"/>
+	<bean id="QuestionsCMSComponentController" class="com.expertsoft.controllers.cms.QuestionsCMSComponentController" scope="tenant">
+		<property name="productWithQuestionsFacade" ref="productWithQuestionsFacade"/>
 	</bean>
 
 	<!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties  resource bundle as javascript variables -->

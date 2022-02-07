@@ -32,8 +32,11 @@ items.xsd
 beans.xsd
 ruleset.xml
 *.log
+*.jar
 base.properties
 
-bin/custom/training/trainingstorefront/web/webroot/_ui/addons/questions
+bin/custom/training/trainingbackoffice/
+bin/custom/training/trainingstorefront/web/webroot/_ui/addons/questions/
 bin/custom/training/trainingstorefront/web/webroot/WEB-INF/_ui-src/
-bin/custom/training/trainingstorefront/web/addonsrc/questions
+bin/custom/training/trainingstorefront/web/webroot/WEB-INF/views/addons/
+bin/custom/training/trainingstorefront/web/addonsrc/questions/
