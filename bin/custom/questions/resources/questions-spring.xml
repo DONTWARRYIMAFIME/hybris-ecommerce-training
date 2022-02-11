@@ -13,7 +13,8 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context.xsd">
            
-    <context:annotation-config/> 
+    <context:annotation-config/>
+	<context:component-scan base-package="questions"/>
 
 	<bean id="questionsCoreDataImportedEventListener" parent="abstractCoreDataImportedEventListener">
 		<property name="supportedChannels">
@@ -36,4 +37,37 @@
 		<property name="extensionName" value="questions" />
 	</bean>
 
+	<!--	-->
+
+	<alias name="defaultProductConverter" alias="productConverter"/>
+	<bean id="defaultProductConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.product.data.ProductData"/>
+		<property name="populators">
+			<list>
+				<ref bean="productPopulator"/>
+				<ref bean="productWithQuestionsPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="questionConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.expertsoft.data.QuestionData"/>
+		<property name="populators">
+			<list>
+				<ref bean="questionPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="productWithQuestionsPopulator" class="com.expertsoft.populators.ProductWithQuestionsPopulator">
+		<property name="questionConverter" ref="questionConverter"/>
+	</bean>
+
+	<bean id="questionPopulator" class="com.expertsoft.populators.QuestionPopulator"/>
+
+	<alias name="defaultProductWithQuestionsFacade" alias="productWithQuestionsFacade"/>
+	<bean id="defaultProductWithQuestionsFacade" class="com.expertsoft.facades.impl.DefaultProductWithQuestionsFacade">
+		<property name="productWithQuestionsConverter" ref="productConverter"/>
+		<property name="productService" ref="productService"/>
+	</bean>
 </beans>

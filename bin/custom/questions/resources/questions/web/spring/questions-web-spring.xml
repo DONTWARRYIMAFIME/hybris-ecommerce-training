@@ -13,8 +13,12 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context.xsd">
            
-    <context:annotation-config/> 
+    <context:annotation-config/>
+	<context:component-scan base-package="com.expertsoft.controllers.cms" />
 
+	<bean id="QuestionsCMSComponentController" class="com.expertsoft.controllers.cms.QuestionsCMSComponentController" scope="tenant">
+		<property name="productWithQuestionsFacade" ref="productWithQuestionsFacade"/>
+	</bean>
 
 	<!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties  resource bundle as javascript variables -->
 	<bean id="defaultQuestionsJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
