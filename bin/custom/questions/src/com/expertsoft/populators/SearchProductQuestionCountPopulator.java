@@ -9,10 +9,11 @@ import java.util.Optional;
 public class SearchProductQuestionCountPopulator extends SearchResultVariantProductPopulator
 {
     @Override
-    public void populate(SearchResultValueData source, ProductData target) {
+    public void populate(SearchResultValueData source, ProductData target)
+    {
         super.populate(source, target);
 
-        final Integer questionCount = (Integer) Optional.ofNullable(getValue(source, "questionCount")).orElse(0);
+        final Integer questionCount = Integer.parseInt((String) Optional.ofNullable(getValue(source, "questionCount")).orElse("0"));
         target.setQuestionCount(questionCount);
     }
 }
