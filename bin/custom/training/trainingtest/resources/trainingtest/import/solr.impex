@@ -15,3 +15,17 @@ INSERT_UPDATE SolrIndexedProperty; solrIndexedType(identifier)[unique = true]; n
 # Other search query facets
 INSERT_UPDATE SolrSearchQueryProperty; indexedProperty(name, solrIndexedType(identifier))[unique = true]; facet[default = true]; facetType(code); priority; facetDisplayNameProvider              ; facetSortProvider             ; facetTopValuesProvider   ; includeInResponse[default = true]; searchQueryTemplate(name, indexedType(identifier))[unique = true][default = DEFAULT:$solrIndexedType]
                                      ; questionCount:$solrIndexedType                                   ;                      ; MultiSelectOr  ; 3000    ; questionCountFacetDisplayNameProvider ; distanceAttributeSortProvider ; defaultTopValuesProvider ;                                  ;
+
+# Define the available sorts
+INSERT_UPDATE SolrSort; &sortRefID; indexedType(identifier)[unique = true]; code[unique = true]; name              ; useBoost
+                      ; sortRef7  ; $solrIndexedType                      ; questionCount-asc  ; questions (fewer) ; false
+                      ; sortRef8  ; $solrIndexedType                      ; questionCount-desc ; questions (more)  ; false
+
+# Define the sort fields
+INSERT_UPDATE SolrSortField; sort(indexedType(identifier), code)[unique = true]; fieldName[unique = true]; ascending[unique = true]
+                           ; $solrIndexedType:questionCount-asc                ; questionCount           ; true
+                           ; $solrIndexedType:questionCount-desc               ; questionCount           ; false
+
+# Declare the indexed type Product
+INSERT_UPDATE SolrIndexedType; identifier[unique = true]; type(code); variant; sorts(&sortRefID)[mode = append]
+                             ; $solrIndexedType         ; Product   ; false  ; sortRef7,sortRef8
