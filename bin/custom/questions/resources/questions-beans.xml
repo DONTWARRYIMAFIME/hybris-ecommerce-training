@@ -14,5 +14,6 @@
 
     <bean class="de.hybris.platform.commercefacades.product.data.ProductData">
         <property name="questions" type="java.util.List&lt;com.expertsoft.data.QuestionData&gt;"/>
+        <property name="questionCount" type="Integer"/>
     </bean>
 </beans>

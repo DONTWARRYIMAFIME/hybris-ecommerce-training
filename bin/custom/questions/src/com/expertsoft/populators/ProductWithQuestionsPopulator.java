@@ -29,5 +29,6 @@ public class ProductWithQuestionsPopulator implements Populator<ProductModel, Pr
         final List<QuestionData> questionDataList = questionConverter.convertAll(questionModels);
 
         productData.setQuestions(questionDataList);
+        productData.setQuestionCount(questionDataList.size());
     }
 }

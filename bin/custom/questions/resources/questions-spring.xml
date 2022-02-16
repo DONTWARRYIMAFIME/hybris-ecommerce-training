@@ -37,8 +37,7 @@
 		<property name="extensionName" value="questions" />
 	</bean>
 
-	<!--	-->
-
+	<!-- Converters -->
 	<alias name="defaultProductConverter" alias="productConverter"/>
 	<bean id="defaultProductConverter" parent="abstractPopulatingConverter">
 		<property name="targetClass" value="de.hybris.platform.commercefacades.product.data.ProductData"/>
@@ -59,15 +58,42 @@
 		</property>
 	</bean>
 
+	<alias name="defaultCommerceSearchResultProductConverter" alias="commerceSearchResultProductConverter"/>
+	<bean id="defaultCommerceSearchResultProductConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.product.data.ProductData"/>
+		<property name="populators">
+			<list>
+				<ref bean="commerceSearchResultProductPopulator"/>
+				<ref bean="searchResultPickupAvailabilityPopulator"/>
+				<ref bean="searchProductQuestionsPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Populators -->
 	<bean id="productWithQuestionsPopulator" class="com.expertsoft.populators.ProductWithQuestionsPopulator">
 		<property name="questionConverter" ref="questionConverter"/>
 	</bean>
 
 	<bean id="questionPopulator" class="com.expertsoft.populators.QuestionPopulator"/>
 
+	<bean id="searchProductQuestionsPopulator" class="com.expertsoft.populators.SearchProductQuestionCountPopulator"
+		  parent="variantCommerceSearchResultProductPopulator">
+
+	</bean>
+
+	<!-- Facades -->
 	<alias name="defaultProductWithQuestionsFacade" alias="productWithQuestionsFacade"/>
 	<bean id="defaultProductWithQuestionsFacade" class="com.expertsoft.facades.impl.DefaultProductWithQuestionsFacade">
 		<property name="productWithQuestionsConverter" ref="productConverter"/>
 		<property name="productService" ref="productService"/>
 	</bean>
+
+	<!-- Providers -->
+	<bean id="productQuestionCountProvider"
+		  class="com.expertsoft.search.solrfacetsearch.provider.impl.ProductQuestionCountProvider"
+		  parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+	</bean>
+
 </beans>
