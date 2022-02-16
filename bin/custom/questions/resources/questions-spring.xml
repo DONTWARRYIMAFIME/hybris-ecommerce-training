@@ -96,4 +96,8 @@
 		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
 	</bean>
 
+	<bean id="questionCountFacetDisplayNameProvider"
+		  class="com.expertsoft.search.solrfacetsearch.provider.impl.QuestionCountFacetDisplayNameProvider">
+	</bean>
+
 </beans>

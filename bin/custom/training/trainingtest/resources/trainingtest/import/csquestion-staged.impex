@@ -1,0 +1,12 @@
+$catalogVersion = Staged
+$productCatalog = electronicsProductCatalog
+$catalogVersion = catalogversion(catalog(id[default=$productCatalog]), version[default=$catalogVersion])[unique=true, default=$productCatalog:$catalogVersion]
+
+INSERT_UPDATE Question; code[unique = true, allownull = false]; product(code, $catalogVersion); question[allownull = false]     ; questionCustomer(name); answer[default = defaultAnswer]; answerCustomer(name);
+                      ; Q0001                                 ; 2934297                       ; Sample Answer 1                 ; Zohan                 ;                                ;
+                      ; Q0002                                 ; 2934297                       ; Sample Question 2               ; Zohan                 ; Sample Answer 2                ;                     ; test user 2
+                      ; Q0003                                 ; 2934297                       ; Sample Question 3               ; Zohan                 ; Sample Answer 3                ;                     ;
+                      ; Q0004                                 ; 2938458                       ; Is it fast?                     ; Wei Liu               ; Nope...                        ; Steve Reviewer      ;
+                      ; Q0005                                 ; 1978440_md                    ; When will the next delivery be? ; test user 1           ;                                ;                     ;
+
+

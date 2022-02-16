@@ -10,7 +10,6 @@ import de.hybris.platform.core.initialization.SystemSetup.Type;
 import de.hybris.platform.core.initialization.SystemSetupContext;
 import de.hybris.platform.core.initialization.SystemSetupParameter;
 import de.hybris.platform.core.initialization.SystemSetupParameterMethod;
-import de.hybris.platform.util.Config;
 import com.expertsoft.test.constants.TrainingTestConstants;
 import com.expertsoft.test.orders.AcceleratorTestOrderData;
 
@@ -101,7 +100,8 @@ public class TestDataSystemSetup extends AbstractSystemSetup
 			importImpexFile(context, "/trainingtest/import/csquotes.impex");
 
 			LOG.info("Creating Test Questions...");
-			importImpexFile(context, "/trainingtest/import/csquestion.impex");
+			importImpexFile(context, "/trainingtest/import/csquestion-staged.impex");
+			importImpexFile(context, "/trainingtest/import/csquestion-online.impex");
 
 			LOG.info("Creating ContentSlot for questions...");
 			importImpexFile(context, "/trainingtest/import/questionCMSComponent.impex");

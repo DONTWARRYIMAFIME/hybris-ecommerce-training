@@ -1,4 +1,4 @@
-$catalogVersion = Staged
+$catalogVersion = Online
 $productCatalog = electronicsProductCatalog
 $catalogVersion = catalogversion(catalog(id[default=$productCatalog]), version[default=$catalogVersion])[unique=true, default=$productCatalog:$catalogVersion]
 
