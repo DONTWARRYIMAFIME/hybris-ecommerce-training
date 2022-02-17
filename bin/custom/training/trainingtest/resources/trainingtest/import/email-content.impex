@@ -1,0 +1,24 @@
+$contentCatalog = electronicsContentCatalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]), CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
+
+# Path to the Velocity Templates
+# Import config properties into impex macros for modulegen
+UPDATE GenericItem[processor = de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor]; pk[unique = true]
+$emailResource = $config-emailResourceValue
+
+# Package of the Context class
+
+$emailPackageName = com.expertsoft.facades.process.email.context
+
+# Create Template Renderers
+INSERT_UPDATE RendererTemplate; code[unique = true]    ; contextClass                                ; templateScript[lang = en, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]; rendererType(code)[default = 'velocity']
+                              ; email-questionsBody    ; $emailPackageName.SendQuestionsEmailContext ; $emailResource/email-questionsBody.vm
+                              ; email-questionsSubject ; $emailPackageName.SendQuestionsEmailContext ; $emailResource/email-questionsSubject.vm
+
+# Create Email page Template
+INSERT_UPDATE EmailPageTemplate; $contentCV[unique = true]; uid[unique = true]     ; active; frontendTemplateName; subject(code)          ; htmlTemplate(code)  ; restrictedPageTypes(code)
+                               ;                          ; QuestionsEmailTemplate ; true  ; questionsEmail      ; email-questionsSubject ; email-questionsBody ; EmailPage
+
+# Create Email Page
+INSERT_UPDATE EmailPage; $contentCV[unique = true]; uid[unique = true]     ; masterTemplate(uid, $contentCV); approvalStatus(code)[default = 'approved']
+                       ;                          ; QuestionsEmailTemplate ; QuestionsEmailTemplate         ;
