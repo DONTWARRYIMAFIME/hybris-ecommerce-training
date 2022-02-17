@@ -11,14 +11,18 @@ $emailResource = $config-emailResourceValue
 $emailPackageName = com.expertsoft.facades.process.email.context
 
 # Create Template Renderers
-INSERT_UPDATE RendererTemplate; code[unique = true]    ; contextClass                                ; templateScript[lang = en, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]; rendererType(code)[default = 'velocity']
-                              ; email-questionsBody    ; $emailPackageName.SendQuestionsEmailContext ; $emailResource/email-questionsBody.vm
-                              ; email-questionsSubject ; $emailPackageName.SendQuestionsEmailContext ; $emailResource/email-questionsSubject.vm
+INSERT_UPDATE RendererTemplate; code[unique = true]         ; contextClass                                ; templateScript[lang = en, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]; rendererType(code)[default = 'velocity']
+                              ; email-sendQuestions-body    ; $emailPackageName.SendQuestionsEmailContext ; $emailResource/email-sendQuestions-body.vm
+                              ; email-sendQuestions-subject ; $emailPackageName.SendQuestionsEmailContext ; $emailResource/email-sendQuestions-subject.vm
 
 # Create Email page Template
-INSERT_UPDATE EmailPageTemplate; $contentCV[unique = true]; uid[unique = true]     ; active; frontendTemplateName; subject(code)          ; htmlTemplate(code)  ; restrictedPageTypes(code)
-                               ;                          ; QuestionsEmailTemplate ; true  ; questionsEmail      ; email-questionsSubject ; email-questionsBody ; EmailPage
+INSERT_UPDATE EmailPageTemplate; $contentCV[unique = true]; uid[unique = true]         ; active; frontendTemplateName; subject(code)               ; htmlTemplate(code)       ; restrictedPageTypes(code)
+                               ;                          ; SendQuestionsEmailTemplate ; true  ; SendQuestionsEmail  ; email-sendQuestions-subject ; email-sendQuestions-body ; EmailPage
 
 # Create Email Page
-INSERT_UPDATE EmailPage; $contentCV[unique = true]; uid[unique = true]     ; masterTemplate(uid, $contentCV); approvalStatus(code)[default = 'approved']
-                       ;                          ; QuestionsEmailTemplate ; QuestionsEmailTemplate         ;
+INSERT_UPDATE EmailPage; $contentCV[unique = true]; uid[unique = true] ; masterTemplate(uid, $contentCV); approvalStatus(code)[default = 'approved']
+                       ;                          ; SendQuestionsEmail ; SendQuestionsEmailTemplate     ;
+
+# Define the cron job and the job that it wraps
+INSERT_UPDATE SendQuestionsEmailCronJob; code[unique = true]       ; job(code)             ; singleExecutable
+                                       ; sendQuestionsEmailCronJob ; sendQuestionsEmailJob ; false

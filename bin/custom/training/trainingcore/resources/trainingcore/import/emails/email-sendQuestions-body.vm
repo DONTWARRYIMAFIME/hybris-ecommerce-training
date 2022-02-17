@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="#ffffff">
+    ${ctx.cmsSlotContents.SiteLogo}
+
+    #foreach ($question in $ctx.questions)
+        <p>Product: $question.product.name</p>
+        <p>Question: $question.question</p>
+        <p>Question's Author: $question.questionCustomer.name</p>
+
+        #if ($question.answer)
+            <p>Answer: $question.answer</p>
+            <p>Answer's Author: $question.answerCustomer.name</p>
+        #end
+
+    #end
+</body>
+</html>
