@@ -30,6 +30,11 @@
 		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping" 
 		  p:mapping="media" 
 		  p:converter-ref="batchMediaProductConverter"/>
+
+	<bean id="myStockLevelConverterMapping"
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+		  p:mapping="stock"
+		  p:converter-ref="customStockLevelConverter"/>
 							
 	<!-- Converters -->
 	<bean id="batchMediaConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
@@ -78,4 +83,20 @@
 			<value>;{+0};/300Wx300H/{1};/96Wx96H/{1};/1200Wx1200H/{1};/515Wx515H/{1},/96Wx96H/{1},/30Wx30H/{1};/300Wx300H/{1};/96Wx96H/{1};{1};{S}</value>
 		</property>
 	</bean>
+
+	<bean id="customStockLevelConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>
+				#{defaultImpexProductHeader}
+				INSERT_UPDATE StockLevel;available;warehouse(code);inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>
+				;{+0};{+1};{2};{+3};{+4};{+5};{+6}
+			</value>
+		</property>
+	</bean>
+
+
 </beans>
