@@ -11,6 +11,7 @@ import de.hybris.platform.servicelayer.dto.converter.Converter;
 import org.springframework.beans.factory.annotation.Required;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductWithQuestionsPopulator implements Populator<ProductModel, ProductData>
 {
@@ -25,7 +26,7 @@ public class ProductWithQuestionsPopulator implements Populator<ProductModel, Pr
     @Override
     public void populate(ProductModel productModel, ProductData productData) throws ConversionException
     {
-        final List<QuestionModel> questionModels = productModel.getQuestions();
+        final List<QuestionModel> questionModels = productModel.getQuestions().stream().filter(QuestionModel::getApproved).collect(Collectors.toList());
         final List<QuestionData> questionDataList = questionConverter.convertAll(questionModels);
 
         productData.setQuestions(questionDataList);
