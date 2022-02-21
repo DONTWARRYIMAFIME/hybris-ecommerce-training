@@ -351,6 +351,9 @@
 	<bean id="generateNotPickedUpConsignmentCanceledEmail" parent="abstractGenerateEmailAction">
 		<property name="frontendTemplateName" value="NotPickedUpConsignmentCanceledEmailTemplate"/>
 	</bean>
+	<bean id="generateQuestionsEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="QuestionsEmailTemplate"/>
+	</bean>
 
 	<bean id="removeSentEmail"
 	      class="de.hybris.platform.acceleratorservices.process.email.actions.RemoveSentEmailAction"
@@ -468,6 +471,11 @@
 	<bean id="quoteExpiredProcessDefinitionResource"
 		  class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
 		<property name="resource" value="classpath:/trainingcore/processes/quote/quote-expired-email-process.xml"/>
+	</bean>
+
+	<bean id="sendQuestionsEmailProcessDefinitionResource"
+		  class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/trainingcore/processes/sendQuestionsEmailProcess.xml"/>
 	</bean>
 
 	<!-- Quotes email notification jobs -->
