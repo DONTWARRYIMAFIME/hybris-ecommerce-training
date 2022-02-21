@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductQuestionCountProvider extends AbstractPropertyFieldValueProvider implements FieldValueProvider, Serializable
 {
@@ -39,12 +40,10 @@ public class ProductQuestionCountProvider extends AbstractPropertyFieldValueProv
                                                 final IndexedProperty indexedProperty)
     {
         final List<FieldValue> fieldValues = new ArrayList<>();
-        final List<QuestionModel> questions = product.getQuestions();
+        final List<QuestionModel> questions = product.getQuestions().stream().filter(QuestionModel::getApproved).collect(Collectors.toList());
 
-        if (questions != null)
-        {
-            addFieldValues(fieldValues, indexedProperty, null, questions.size());
-        }
+        addFieldValues(fieldValues, indexedProperty, null, questions.size());
+
         return fieldValues;
     }
 

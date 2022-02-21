@@ -1,0 +1,6 @@
+INSERT_UPDATE NotBlankConstraint; id[unique = true]     ; severity(code, itemtype(code)); active; descriptor(enclosingType(code), qualifier); message
+                                ; CodeCannotBeBlank     ; ERROR:Severity                ; true  ; Question:code                             ; Code cannot be blank
+                                ; QuestionCannotBeBlank ; ERROR:Severity                ; true  ; Question:question                         ; Question cannot be blank
+
+INSERT_UPDATE NotNullConstraint; id[unique = true]  ; severity(code, itemtype(code)); active; descriptor(enclosingType(code), qualifier); message
+                               ; AuthorCannotBeNull ; ERROR:Severity                ; true  ; Question:questionCustomer                 ; Author cannot be null

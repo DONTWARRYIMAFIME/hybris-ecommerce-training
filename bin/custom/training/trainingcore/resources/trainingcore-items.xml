@@ -102,24 +102,6 @@
                     </attribute>
                 </attributes>
             </itemtype>
-
-            <itemtype code="SendQuestionsEmailProcess" extends="StoreFrontCustomerProcess"
-                      jaloclass="com.expertsoft.core.jalo.process.SendQuestionsEmailProcess">
-                <attributes>
-                    <attribute qualifier="productCode" type="java.lang.String">
-                        <persistence type="property" />
-                    </attribute>
-                    <attribute qualifier="questionCode" type="java.lang.String">
-                        <persistence type="property" />
-                    </attribute>
-                    <attribute qualifier="question" type="java.lang.String">
-                        <persistence type="property" />
-                    </attribute>
-                    <attribute qualifier="answer" type="java.lang.String">
-                        <persistence type="property"/>
-                    </attribute>
-                </attributes>
-            </itemtype>
         </typegroup>
     </itemtypes>
 </items>

@@ -25,21 +25,33 @@
 			<deployment table="Question" typecode="30001"/>
 			<attributes>
 				<attribute qualifier="code" type="java.lang.String">
+					<description>Unique code for question</description>
 					<persistence type="property"/>
 					<modifiers initial="true" unique="true" optional="false"/>
 				</attribute>
+				<attribute qualifier="approved" type="java.lang.Boolean">
+					<description>Approved to show on PLP/PDP</description>
+					<persistence type="property"/>
+					<defaultvalue>
+						java.lang.Boolean.FALSE
+					</defaultvalue>
+				</attribute>
 				<attribute qualifier="question" type="java.lang.String">
+					<description>Question</description>
 					<persistence type="property"/>
 					<modifiers optional="false"/>
 				</attribute>
 				<attribute qualifier="questionCustomer" type="Customer">
+					<description>Question's Author</description>
 					<persistence type="property"/>
 					<modifiers optional="false"/>
 				</attribute>
 				<attribute qualifier="answer" type="java.lang.String">
+					<description>Answer</description>
 					<persistence type="property"/>
 				</attribute>
 				<attribute qualifier="answerCustomer" type="Customer">
+					<description>Answer's author</description>
 					<persistence type="property"/>
 				</attribute>
 			</attributes>
