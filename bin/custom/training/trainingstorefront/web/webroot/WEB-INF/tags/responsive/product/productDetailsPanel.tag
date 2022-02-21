@@ -24,6 +24,7 @@
 						<ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
 							<product:productPricePanel product="${product}" />
 						</ycommerce:testId>
+						<div class="warrantyYears">Warranty Year: ${product.warrantyYears}</div>
 						<div class="description">${ycommerce:sanitizeHTML(product.summary)}</div>
 					</div>
 				</div>

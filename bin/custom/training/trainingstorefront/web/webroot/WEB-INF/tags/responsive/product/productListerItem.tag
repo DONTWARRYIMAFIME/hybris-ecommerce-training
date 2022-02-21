@@ -46,6 +46,7 @@
 			<div class="product__listing--description">${ycommerce:sanitizeHTML(product.summary)}</div>
 		</c:if>
 
+		<div>Warranty years: ${product.questionCount}</div>
 		<div>Question count: ${product.questionCount}</div>
 
 		<c:set var="product" value="${product}" scope="request"/>
