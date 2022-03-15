@@ -38,15 +38,14 @@
 	</bean>
 
 	<!-- Converters -->
-	<alias name="defaultProductConverter" alias="productConverter"/>
-	<bean id="defaultProductConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="de.hybris.platform.commercefacades.product.data.ProductData"/>
-		<property name="populators">
-			<list>
-				<ref bean="productPopulator"/>
-				<ref bean="productWithQuestionsPopulator"/>
-			</list>
-		</property>
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productConverter"/>
+		<property name="add" ref="productWithQuestionsPopulator"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productConverter"/>
+		<property name="add" ref="productWarrantyPopulator"/>
 	</bean>
 
 	<bean id="questionConverter" parent="abstractPopulatingConverter">
@@ -58,16 +57,14 @@
 		</property>
 	</bean>
 
-	<alias name="defaultCommerceSearchResultProductConverter" alias="commerceSearchResultProductConverter"/>
-	<bean id="defaultCommerceSearchResultProductConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="de.hybris.platform.commercefacades.product.data.ProductData"/>
-		<property name="populators">
-			<list>
-				<ref bean="commerceSearchResultProductPopulator"/>
-				<ref bean="searchResultPickupAvailabilityPopulator"/>
-				<ref bean="searchProductQuestionsPopulator"/>
-			</list>
-		</property>
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="commerceSearchResultProductConverter"/>
+		<property name="add" ref="searchProductQuestionsPopulator"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="commerceSearchResultProductConverter"/>
+		<property name="add" ref="searchProductWarrantyPopulator"/>
 	</bean>
 
 	<!-- Populators -->
@@ -79,8 +76,13 @@
 
 	<bean id="searchProductQuestionsPopulator" class="com.expertsoft.populators.SearchProductQuestionCountPopulator"
 		  parent="variantCommerceSearchResultProductPopulator">
-
 	</bean>
+
+	<bean id="searchProductWarrantyPopulator" class="com.expertsoft.populators.SearchProductWarrantyPopulator"
+		  parent="variantCommerceSearchResultProductPopulator">
+	</bean>
+
+	<bean id="productWarrantyPopulator" class="com.expertsoft.populators.ProductWarrantyPopulator"/>
 
 	<!-- Facades -->
 	<alias name="defaultProductWithQuestionsFacade" alias="productWithQuestionsFacade"/>
@@ -100,6 +102,15 @@
 		  class="com.expertsoft.search.solrfacetsearch.provider.impl.QuestionCountFacetDisplayNameProvider">
 	</bean>
 
+	<bean id="productWarrantyProvider"
+		  class="com.expertsoft.search.solrfacetsearch.provider.impl.ProductWarrantyProvider"
+		  parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+	</bean>
+
+	<bean id="productWarrantyFacetDisplayNameProvider"
+		  class="com.expertsoft.search.solrfacetsearch.provider.impl.ProductWarrantyFacetDisplayNameProvider">
+	</bean>
 
 	<bean id="generateSendQuestionsEmail" parent="abstractGenerateEmailAction">
 		<property name="frontendTemplateName" value="QuestionsEmailTemplate"/>

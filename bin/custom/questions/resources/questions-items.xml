@@ -90,5 +90,14 @@
 				</attribute>
 			</attributes>
 		</itemtype>
+
+		<itemtype generate="false" code="Product" autocreate="false">
+			<attributes>
+				<attribute qualifier="warrantyYears" type="java.lang.Integer">
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
 	</itemtypes>
 </items>

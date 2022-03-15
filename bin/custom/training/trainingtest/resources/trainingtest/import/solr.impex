@@ -29,3 +29,23 @@ INSERT_UPDATE SolrSortField; sort(indexedType(identifier), code)[unique = true];
 # Declare the indexed type Product
 INSERT_UPDATE SolrIndexedType; identifier[unique = true]; type(code); variant; sorts(&sortRefID)[mode = append]
                              ; $solrIndexedType         ; Product   ; false  ; sortRef7,sortRef8
+
+
+#########################################
+$solrIndexedType = electronicsProductType
+
+# Define years ranges
+INSERT_UPDATE SolrValueRange; &rangeValueRefID      ; solrValueRangeSet(name)[unique = true]; name[unique = true]; from; to;
+                            ; rangeRefWarrantyYears ; electronicsWarrantyYearsRange         ; W0-W15             ; 0   ; 15
+
+# Define years range set
+INSERT_UPDATE SolrValueRangeSet; name[unique = true]           ; qualifier; type; solrValueRanges(&rangeValueRefID); facetSearchConfigs(name)
+                               ; electronicsWarrantyYearsRange ;          ; int ; rangeRefWarrantyYears            ; electronicsIndex
+
+# Other facet properties
+INSERT_UPDATE SolrIndexedProperty; solrIndexedType(identifier)[unique = true]; name[unique = true]; displayName    ; type(code); sortableType(code); currency[default = false]; localized[default = false]; multiValue[default = false]; facet[default = true]; facetType(code); facetSort(code); visible; useForSpellchecking[default = false]; useForAutocomplete[default = false]; fieldValueProvider      ; rangeSets(name)
+                                 ; $solrIndexedType                          ; warrantyYears      ; Warranty Years ; int       ; int               ;                          ;                           ;                            ;                      ; MultiSelectOr  ; Alpha          ; true   ;                                     ;                                    ; productWarrantyProvider ; electronicsWarrantyYearsRange
+
+# Other search query facets
+INSERT_UPDATE SolrSearchQueryProperty; indexedProperty(name, solrIndexedType(identifier))[unique = true]; facet[default = true]; facetType(code); priority; facetDisplayNameProvider                ; facetSortProvider             ; facetTopValuesProvider   ; includeInResponse[default = true]; searchQueryTemplate(name, indexedType(identifier))[unique = true][default = DEFAULT:$solrIndexedType]
+                                     ; warrantyYears:$solrIndexedType                                   ;                      ; MultiSelectOr  ; 3200    ; productWarrantyFacetDisplayNameProvider ; distanceAttributeSortProvider ; defaultTopValuesProvider ;                                  ;

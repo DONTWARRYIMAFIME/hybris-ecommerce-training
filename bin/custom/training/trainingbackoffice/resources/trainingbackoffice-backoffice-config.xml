@@ -77,6 +77,16 @@
 			</editorArea:tab>
 		</editorArea:editorArea>
 	</context>
+
+	<context type="Product" merge-by="type" parent="GenericItem" component="editor-area">
+		<editorArea:editorArea>
+			<editorArea:tab name="hmc.properties">
+				<editorArea:section name="hmc.properties">
+					<editorArea:attribute qualifier="warrantyYears" label="Warranty Years"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
 	<!-- Editor area configuration ends here-->
 
 	<!-- New item creation area configuration starts here-->
